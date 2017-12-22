@@ -44,6 +44,11 @@ public class KorisnikContoller {
         return new ResponseEntity<String>("odjava", HttpStatus.OK);
     }
 
+    @RequestMapping("/proba")
+    public ResponseEntity<String> Proba()
+    {
+         return new ResponseEntity<String>("hi", HttpStatus.OK);
+    }
     @PostMapping("registracija")
     public ResponseEntity<Boolean> Registracija(@RequestBody Korisnik k) {
         if (korisnikService.dodajKorisnika(k))
@@ -60,7 +65,7 @@ public class KorisnikContoller {
 
     }
 
-    @PostMapping("test")
+   /* @PostMapping("test")
     public ResponseEntity<Boolean> Test(HttpServletRequest request)//, @RequestParam LinkedList<Korisnik> listaKorisnika)
     {
         String test = request.getParameter("test");
@@ -71,5 +76,5 @@ public class KorisnikContoller {
 
         }
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-    }
+    } */
 }
