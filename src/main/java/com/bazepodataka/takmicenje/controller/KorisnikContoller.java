@@ -1,6 +1,8 @@
 package com.bazepodataka.takmicenje.controller;
 
 
+import com.bazepodataka.takmicenje.entity.Pitanje;
+import com.bazepodataka.takmicenje.entity.Test;
 import jdk.nashorn.internal.ir.ObjectNode;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ public class KorisnikContoller {
     @Autowired
     private KorisnikService korisnikService;
 
+
     @Autowired
     private  HttpSession httpSession;
 
@@ -44,11 +47,6 @@ public class KorisnikContoller {
         return new ResponseEntity<String>("odjava", HttpStatus.OK);
     }
 
-    @RequestMapping("/proba")
-    public ResponseEntity<String> Proba()
-    {
-         return new ResponseEntity<String>("hi", HttpStatus.OK);
-    }
     @PostMapping("registracija")
     public ResponseEntity<Boolean> Registracija(@RequestBody Korisnik k) {
         if (korisnikService.dodajKorisnika(k))
@@ -64,6 +62,7 @@ public class KorisnikContoller {
         return new ResponseEntity<Boolean>(x, HttpStatus.OK);
 
     }
+
 
    /* @PostMapping("test")
     public ResponseEntity<Boolean> Test(HttpServletRequest request)//, @RequestParam LinkedList<Korisnik> listaKorisnika)
