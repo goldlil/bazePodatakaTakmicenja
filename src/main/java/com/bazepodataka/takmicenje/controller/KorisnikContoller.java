@@ -1,10 +1,7 @@
 package com.bazepodataka.takmicenje.controller;
 
 
-import com.bazepodataka.takmicenje.entity.Pitanje;
-import com.bazepodataka.takmicenje.entity.Test;
-import jdk.nashorn.internal.ir.ObjectNode;
-import org.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,15 +23,15 @@ public class KorisnikContoller {
     @Autowired
     private KorisnikService korisnikService;
 
-
     @Autowired
     private  HttpSession httpSession;
 
     @GetMapping("/prijava")
-    public ResponseEntity<Prijava> Prijava(@RequestParam(value = "korisnickoIme") String korisnickoIme, @RequestParam String sifra)
+    public ResponseEntity<Prijava> Prijava(@RequestParam String korisnickoIme, @RequestParam String sifra)
     {
-        if(korisnikService.daLiPostojiKorisnik(new Korisnik(korisnickoIme, sifra, "", "")))
-            return new ResponseEntity<Prijava>(new Prijava(true, "korisnik", httpSession.getId(), korisnickoIme), HttpStatus.OK);
+        String korisnikPostoji = korisnikService.daLiPostojiKorisnik(new Korisnik(korisnickoIme, sifra, "", ""));
+        if(korisnikPostoji != null)
+            return new ResponseEntity<Prijava>(new Prijava(true, korisnickoIme, korisnikPostoji, ""), HttpStatus.OK);
         else
             return  new ResponseEntity<Prijava>(new Prijava(false, "", "", ""), HttpStatus.OK);
 
@@ -63,17 +60,17 @@ public class KorisnikContoller {
 
     }
 
-
-   /* @PostMapping("test")
-    public ResponseEntity<Boolean> Test(HttpServletRequest request)//, @RequestParam LinkedList<Korisnik> listaKorisnika)
+    @PostMapping("/obrisi/{id}")
+    public ResponseEntity<Boolean> obrisiKorisnika(@PathVariable int id)
     {
-        String test = request.getParameter("test");
-        LinkedList<Korisnik> listaKorisnika = request.getParameter("listaKorisnika");
-        System.out.println(test);
-        for (Korisnik k: listaKorisnika) {
-            System.out.println(k);
+        return new ResponseEntity<Boolean>(korisnikService.obrisiKorisnik(id), HttpStatus.OK);
+    }
 
-        }
-        return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-    } */
+    @PostMapping("/svi/{id}")
+    public ResponseEntity<List<Korisnik>> dajSveKorisnik(@PathVariable int id)
+    {
+        return new ResponseEntity<List<Korisnik>>(korisnikService.dajSveKorisnike(id), HttpStatus.OK);
+    }
+
+
 }

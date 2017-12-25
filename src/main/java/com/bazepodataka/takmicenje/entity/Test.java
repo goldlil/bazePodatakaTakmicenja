@@ -8,7 +8,7 @@ public class Test implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="idTest", nullable = false)
-    private int testTd;
+    private int testId;
     @Column(name="imeTesta", nullable = false)
     private String imeTesta;
 
@@ -16,13 +16,16 @@ public class Test implements Serializable {
         this.imeTesta = imeTesta;
     }
 
-
-    public int getTestTd() {
-        return testTd;
+    public Test(int testId) {
+        this.testId = testId;
     }
 
-    protected void setTestTd(int testTd) {
-        this.testTd = testTd;
+    public int getTestId() {
+        return testId;
+    }
+
+    protected void setTestId(int testId) {
+        this.testId = testId;
     }
 
     public String getImeTesta() {

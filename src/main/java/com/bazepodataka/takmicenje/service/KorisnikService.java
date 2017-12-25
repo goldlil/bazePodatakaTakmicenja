@@ -22,7 +22,7 @@ public class KorisnikService {
         }
     }
 
-    public boolean daLiPostojiKorisnik(Korisnik korisnik)
+    public String daLiPostojiKorisnik(Korisnik korisnik)
     {
         return korisnikDao.postojiKorisnik(korisnik.getKorisnickoIme(), korisnik.getSifra());
     }
@@ -30,6 +30,16 @@ public class KorisnikService {
     public boolean daLiJeSlobodnoKorisnickoIme(String korisnickoIme)
     {
         return korisnikDao.slobodnoKorisnickoIme(korisnickoIme);
+    }
+
+    public boolean obrisiKorisnik(int id)
+    {
+        return korisnikDao.obrisiKorisnika(id);
+    }
+
+    public List<Korisnik> dajSveKorisnike(int id)
+    {
+       return korisnikDao.dajSveKorisnike(id);
     }
 
 

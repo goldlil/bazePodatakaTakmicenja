@@ -1,9 +1,12 @@
 package com.bazepodataka.takmicenje.dao;
 
 
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import com.bazepodataka.takmicenje.service.KorisnikService;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.bazepodataka.takmicenje.entity.Korisnik;
@@ -16,11 +19,12 @@ public class KorisnikDao {
     private EntityManager entityManager;
 
 
-    public boolean postojiKorisnik(String korisinckoIme, String sifra){
+    public String postojiKorisnik(String korisinckoIme, String sifra){
         String hq = "FROM Korisnik as k WHERE k.korisnickoIme = ? and k.sifra = ?";
-        int count = entityManager.createQuery(hq).setParameter(1, korisinckoIme).setParameter(2, sifra).getResultList().size();
-
-        return count != 0;
+        List<Korisnik> l = entityManager.createQuery(hq).setParameter(1, korisinckoIme).setParameter(2, sifra).getResultList();
+        if(l.size() == 0)
+            return "null";
+        else return l.get(0).getTipKorisnika();
     }
 
     public boolean slobodnoKorisnickoIme(String korisinckoIme){
@@ -35,5 +39,27 @@ public class KorisnikDao {
     public void dodajKorisnika(Korisnik k)
     {
         entityManager.persist(k);
+    }
+
+    public boolean obrisiKorisnika(int id)
+    {
+        try {
+            String hq = "FROM Korisnik as k WHERE k.korisnikId = ?";
+            Korisnik k = (Korisnik) entityManager.createQuery(hq).setParameter(1, id).getSingleResult();
+            entityManager.remove(k);
+            return true;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public List<Korisnik> dajSveKorisnike(int id)
+    {
+        String hq = "FROM Korisnik as k WHERE k.korisnikId > ?";
+        List<Korisnik> l= entityManager.createQuery(hq).setParameter(1, id).setMaxResults(10).getResultList();
+        return l;
     }
 }

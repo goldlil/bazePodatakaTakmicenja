@@ -12,11 +12,23 @@ public class Pitanje implements Serializable{
         this.idTesta = idTesta;
     }
 
+   /* public Pitanje(String tekstPitanja, String odgovor, int idTesta) {
+        this.tekstPitanja = tekstPitanja;
+        this.odgovor = odgovor;
+        this.idTesta = new Test(idTesta);
+    }*/
+
+    public  Pitanje()
+    {
+
+    }
+
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="idPitanja", nullable = false)
     private int idPitanja;
-    @Column(name="tekstPitanja", nullable = false)
+    @Column(name="", nullable = false)
     private String tekstPitanja;
     @Column(name="odgovor", nullable = false)
     private String odgovor;
