@@ -2,20 +2,19 @@ package com.bazepodataka.takmicenje.controller;
 
 
 
+import com.bazepodataka.takmicenje.entity.Korisnik;
+import com.bazepodataka.takmicenje.povratneKlase.Prijava;
+import com.bazepodataka.takmicenje.service.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import com.bazepodataka.takmicenje.entity.Korisnik;
-import com.bazepodataka.takmicenje.service.KorisnikService;
 
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.*;
-import java.util.*;
-import com.bazepodataka.takmicenje.povratneKlase.Prijava;
+import java.util.List;
 
-
+@CrossOrigin
 @Controller
 @RequestMapping("/korisnik")
 public class KorisnikContoller {
@@ -30,13 +29,14 @@ public class KorisnikContoller {
     public ResponseEntity<Prijava> Prijava(@RequestParam String korisnickoIme, @RequestParam String sifra)
     {
         String korisnikPostoji = korisnikService.daLiPostojiKorisnik(new Korisnik(korisnickoIme, sifra, "", ""));
-        if(korisnikPostoji != null)
+        if(korisnikPostoji != "null")
             return new ResponseEntity<Prijava>(new Prijava(true, korisnickoIme, korisnikPostoji, ""), HttpStatus.OK);
         else
             return  new ResponseEntity<Prijava>(new Prijava(false, "", "", ""), HttpStatus.OK);
 
     }
 
+    @CrossOrigin(origins =  "http://localhost:3000")
     @GetMapping("/odjava")
     public ResponseEntity<String> Odjava()
     {
@@ -44,6 +44,7 @@ public class KorisnikContoller {
         return new ResponseEntity<String>("odjava", HttpStatus.OK);
     }
 
+    @CrossOrigin(origins =  "http://localhost:3000")
     @PostMapping("registracija")
     public ResponseEntity<Boolean> Registracija(@RequestBody Korisnik k) {
         if (korisnikService.dodajKorisnika(k))
@@ -52,6 +53,7 @@ public class KorisnikContoller {
             return new ResponseEntity<Boolean>(false, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins =  "http://localhost:3000")
     @GetMapping("slobodnoKorisnickoIme")
     public ResponseEntity<Boolean> SlobodnoKorisnickoIme(@RequestParam String korisnickoIme)
     {
@@ -60,12 +62,14 @@ public class KorisnikContoller {
 
     }
 
+    @CrossOrigin(origins =  "http://localhost:3000")
     @PostMapping("/obrisi/{id}")
     public ResponseEntity<Boolean> obrisiKorisnika(@PathVariable int id)
     {
         return new ResponseEntity<Boolean>(korisnikService.obrisiKorisnik(id), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins =  "http://localhost:3000")
     @PostMapping("/svi/{id}")
     public ResponseEntity<List<Korisnik>> dajSveKorisnik(@PathVariable int id)
     {

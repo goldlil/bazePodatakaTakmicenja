@@ -16,9 +16,9 @@ public class Test implements Serializable {
         this.imeTesta = imeTesta;
     }
 
-    public Test(int testId) {
-        this.testId = testId;
-    }
+    public Test(){}
+
+
 
     public int getTestId() {
         return testId;

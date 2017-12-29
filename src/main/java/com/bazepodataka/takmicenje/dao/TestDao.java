@@ -42,7 +42,7 @@ public class TestDao {
         try{
             Test t = listaPitanja.get(0).getIdTesta();
             int id = t.getTestId();
-            String hq = "FROM Test as t WHERE k.testId = ?";
+            String hq = "FROM Test as t WHERE t.testId = ?";
             List<Korisnik> l = entityManager.createQuery(hq).setParameter(1, id).getResultList();
             if(l.size() == 0)
                 throw  new IllegalArgumentException("Id testa ne postoji");

@@ -1,12 +1,9 @@
-/*package com.bazepodataka.takmicenje.konekcijaNaFakultetsku;
+package com.bazepodataka.takmicenje.konekcijaNaFakultetsku;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.DatabaseMetaData;
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import java.sql.SQLException;
+import java.sql.*;
+
 
 public class EtfBaza {
 
@@ -16,8 +13,8 @@ public class EtfBaza {
     static String password = "";
 
     //Baza od fakulteta
-    static String etf_username = "EP16747";
-    static String etf_password = "NXJ7hq3b";
+    static String etf_username = "BP14";
+    static String etf_password = "b3lweHeX";
 
     //Driveri
     static String mySQL_driver = "com.mysql.fabric.jdbc.FabricMySQLDriver";
@@ -44,7 +41,7 @@ public class EtfBaza {
     protected BasicDataSource dataSource;
 
 
-
+    public EtfBaza() {}
     //Metoda open
     //Priprema osobne konekcije i pravi skup konekcija
 
@@ -54,10 +51,10 @@ public class EtfBaza {
     public synchronized void open() throws Exception {
         try {
             dataSource = new BasicDataSource();
-            dataSource.setDriverClassName(mySQL_driver);
-            dataSource.setUrl(urlMySQL);
-            dataSource.setUsername(username);
-            dataSource.setPassword(password);
+            dataSource.setDriverClassName(ojdbc_driver);
+            dataSource.setUrl(urlOracle);
+            dataSource.setUsername(etf_username);
+            dataSource.setPassword(etf_password);
             dataSource.setMaxIdle(dbConnectionsMinCount);
             dataSource.setMaxTotal(dbConnectionsMaxCount);
             dataSource.setMaxWaitMillis(dbConnectionMaxWait);
@@ -75,11 +72,13 @@ public class EtfBaza {
             konekcija = dataSource.getConnection();
 
             System.out.println( "Konektovan");
+            return konekcija;
         }
         catch(SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return konekcija;
+
     }
 
 
@@ -91,4 +90,4 @@ public class EtfBaza {
             e.printStackTrace();
         }
     }
-}*/
+}

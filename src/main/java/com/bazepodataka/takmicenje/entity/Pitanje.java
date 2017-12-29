@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Table(name="Pitanje")
 public class Pitanje implements Serializable{
     public Pitanje(String tekstPitanja, String odgovor, Test idTesta) {
+        System.out.println("tu sam");
         this.tekstPitanja = tekstPitanja;
         this.odgovor = odgovor;
         this.idTesta = idTesta;
