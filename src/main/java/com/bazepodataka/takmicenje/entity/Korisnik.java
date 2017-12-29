@@ -1,9 +1,8 @@
 package com.bazepodataka.takmicenje.entity;
 
 
-import java.io.Serializable;
 import javax.persistence.*;
-import javax.print.DocFlavor;
+import java.io.Serializable;
 
 @Entity
 @Table(name="Korisnik")

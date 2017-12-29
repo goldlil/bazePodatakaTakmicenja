@@ -21,12 +21,11 @@ public class TestDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Test dodajTest(String imeTesta)
+    public Test dodajTest(Test t)
     {
         try {
-            if (imeTesta.length() == 0)
+            if (t.getImeTesta().length() == 0)
                 throw new IllegalArgumentException("Ime testa ne smije biti prazno");
-            Test t = new Test(imeTesta);
             entityManager.persist(t);
             return t;
         }

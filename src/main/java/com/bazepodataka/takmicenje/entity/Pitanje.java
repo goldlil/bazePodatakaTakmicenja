@@ -1,21 +1,21 @@
 package com.bazepodataka.takmicenje.entity;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="Pitanje")
 public class Pitanje implements Serializable{
-    public Pitanje(String tekstPitanja, String odgovor, Test idTesta) {
+    public Pitanje(String tekstPitanja, String tacanOdgovor, Test idTesta) {
         System.out.println("tu sam");
         this.tekstPitanja = tekstPitanja;
-        this.odgovor = odgovor;
+        this.tacanOdgovor = tacanOdgovor;
         this.idTesta = idTesta;
     }
 
-   /* public Pitanje(String tekstPitanja, String odgovor, int idTesta) {
+   /* public Pitanje(String tekstPitanja, String tacanOdgovor, int idTesta) {
         this.tekstPitanja = tekstPitanja;
-        this.odgovor = odgovor;
+        this.tacanOdgovor = tacanOdgovor;
         this.idTesta = new Test(idTesta);
     }*/
 
@@ -31,8 +31,10 @@ public class Pitanje implements Serializable{
     private int idPitanja;
     @Column(name="", nullable = false)
     private String tekstPitanja;
-    @Column(name="odgovor", nullable = false)
-    private String odgovor;
+    @Column(name="tacanOdgovor", nullable = false)
+    private String tacanOdgovor;
+
+    @Column(name="")
 
     @ManyToOne
     @JoinColumn(name = "idTest", nullable = false)
@@ -54,12 +56,12 @@ public class Pitanje implements Serializable{
         this.tekstPitanja = tekstPitanja;
     }
 
-    public String getOdgovor() {
-        return odgovor;
+    public String getTacanOdgovor() {
+        return tacanOdgovor;
     }
 
-    public void setOdgovor(String odgovor) {
-        this.odgovor = odgovor;
+    public void setTacanOdgovor(String tacanOdgovor) {
+        this.tacanOdgovor = tacanOdgovor;
     }
 
     public Test getIdTesta() {

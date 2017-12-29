@@ -10,6 +10,7 @@ import com.bazepodataka.takmicenje.service.KorisnikService;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.bazepodataka.takmicenje.entity.Korisnik;
+import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
 
 
 @Transactional
@@ -61,5 +62,33 @@ public class KorisnikDao {
         String hq = "FROM Korisnik as k WHERE k.korisnikId > ?";
         List<Korisnik> l= entityManager.createQuery(hq).setParameter(1, id).setMaxResults(10).getResultList();
         return l;
+    }
+
+    public List<Korisnik> pretragaKorisnika(String rijec)
+    {
+        try{
+            String hq = "FROM Korisnik as k WHERE k.korisnickoIme like ?";
+            List<Korisnik> listaKorisnika = (List<Korisnik>) entityManager.createQuery(hq).setParameter(1, rijec + "%").setMaxResults(10).getResultList();
+            return listaKorisnika;
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            throw e;
+        }
+    }
+
+    public PovratnaPoruka unaprijediKorisnikaOrganizator(int id)
+    {
+        try{
+            String hq = "FROM Korisnik as k WHERE k.korisnikId = ?";
+            Korisnik k = (Korisnik) entityManager.createQuery(hq).setParameter(1, id).getSingleResult();
+            k.setTipKorisnika("organizator");
+            entityManager.persist(k);
+            return new PovratnaPoruka();
+        }
+        catch (Exception e)
+        {
+            return new PovratnaPoruka(e.getMessage());
+        }
     }
 }

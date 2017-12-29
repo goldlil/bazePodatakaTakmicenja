@@ -1,8 +1,10 @@
 package com.bazepodataka.takmicenje.entity;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 
+@Entity
+@Table(name="Rezultat")
 public class Rezultat implements Serializable{
 
     public int getTestTd() {

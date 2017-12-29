@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -44,7 +45,6 @@ public class KorisnikContoller {
         return new ResponseEntity<String>("odjava", HttpStatus.OK);
     }
 
-    @CrossOrigin(origins =  "http://localhost:3000")
     @PostMapping("registracija")
     public ResponseEntity<Boolean> Registracija(@RequestBody Korisnik k) {
         if (korisnikService.dodajKorisnika(k))
@@ -53,7 +53,6 @@ public class KorisnikContoller {
             return new ResponseEntity<Boolean>(false, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins =  "http://localhost:3000")
     @GetMapping("slobodnoKorisnickoIme")
     public ResponseEntity<Boolean> SlobodnoKorisnickoIme(@RequestParam String korisnickoIme)
     {
@@ -62,19 +61,31 @@ public class KorisnikContoller {
 
     }
 
-    @CrossOrigin(origins =  "http://localhost:3000")
     @PostMapping("/obrisi/{id}")
     public ResponseEntity<Boolean> obrisiKorisnika(@PathVariable int id)
     {
         return new ResponseEntity<Boolean>(korisnikService.obrisiKorisnik(id), HttpStatus.OK);
     }
 
-    @CrossOrigin(origins =  "http://localhost:3000")
     @PostMapping("/svi/{id}")
     public ResponseEntity<List<Korisnik>> dajSveKorisnik(@PathVariable int id)
     {
         return new ResponseEntity<List<Korisnik>>(korisnikService.dajSveKorisnike(id), HttpStatus.OK);
     }
+
+    @PostMapping("/pretraga/{rijec}")
+    public ResponseEntity<List<Korisnik>> pretragaKorisnika(@PathVariable String rijec)
+    {
+        return new ResponseEntity<List<Korisnik>>(korisnikService.pretragaKorisnika(rijec), HttpStatus.OK);
+    }
+
+    @PostMapping("promocijaOrganizator/{id}")
+    public ResponseEntity<PovratnaPoruka> unaprijediKorisnikaOrganizator(@PathVariable int id)
+    {
+        return new ResponseEntity<PovratnaPoruka>(korisnikService.unaprijediKorisnikaOrganizator(id), HttpStatus.OK);
+    }
+
+
 
 
 }

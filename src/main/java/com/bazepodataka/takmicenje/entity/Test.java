@@ -1,6 +1,6 @@
 package com.bazepodataka.takmicenje.entity;
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="Test")
@@ -12,8 +12,21 @@ public class Test implements Serializable {
     @Column(name="imeTesta", nullable = false)
     private String imeTesta;
 
-    public Test(String imeTesta) {
+    public int getVrijemeIzradeTesta() {
+        return vrijemeIzradeTesta;
+    }
+
+    public void setVrijemeIzradeTesta(int vrijemeIzradeTesta) {
+        this.vrijemeIzradeTesta = vrijemeIzradeTesta;
+    }
+
+    @Column(name= "vrijemeZaIzdraduTesta", nullable = false)
+    private int vrijemeIzradeTesta;
+
+    public Test(String imeTesta, int vrijemeIzradeTesta)
+    {
         this.imeTesta = imeTesta;
+        this.vrijemeIzradeTesta = vrijemeIzradeTesta;
     }
 
     public Test(){}

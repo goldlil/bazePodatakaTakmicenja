@@ -1,10 +1,13 @@
 package com.bazepodataka.takmicenje.service;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.bazepodataka.takmicenje.dao.KorisnikDao;
 import com.bazepodataka.takmicenje.entity.Korisnik;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
+
+
+import java.util.List;
 
 @Service
 public class KorisnikService {
@@ -40,6 +43,16 @@ public class KorisnikService {
     public List<Korisnik> dajSveKorisnike(int id)
     {
        return korisnikDao.dajSveKorisnike(id);
+    }
+
+    public List<Korisnik> pretragaKorisnika(String rijec)
+    {
+        return korisnikDao.pretragaKorisnika(rijec);
+    }
+
+    public PovratnaPoruka unaprijediKorisnikaOrganizator(int id)
+    {
+        return korisnikDao.unaprijediKorisnikaOrganizator(id);
     }
 
 

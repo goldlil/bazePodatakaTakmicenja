@@ -1,13 +1,12 @@
 package com.bazepodataka.takmicenje.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
+import com.bazepodataka.takmicenje.dao.TestDao;
+import com.bazepodataka.takmicenje.entity.Pitanje;
+import com.bazepodataka.takmicenje.entity.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.bazepodataka.takmicenje.dao.TestDao;
-import com.bazepodataka.takmicenje.entity.Test;
-import com.bazepodataka.takmicenje.entity.Pitanje;
+
+import java.util.List;
 
 
 @Service
@@ -16,8 +15,8 @@ public class TestService {
     @Autowired
     private TestDao testDao;
 
-    public Test DodajTest(String imeTesta) {
-        return testDao.dodajTest(imeTesta);
+    public Test DodajTest(Test t) {
+        return testDao.dodajTest(t);
     }
 
     public boolean DodajPitanja(List<Pitanje> l){
