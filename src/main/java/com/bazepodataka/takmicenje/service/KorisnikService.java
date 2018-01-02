@@ -55,6 +55,23 @@ public class KorisnikService {
         return korisnikDao.unaprijediKorisnikaOrganizator(id);
     }
 
+    public PovratnaPoruka degradirajOrganizatora(int id)
+    {
+        return korisnikDao.degradirajOrganizatora(id);
+    }
+
+    public PovratnaPoruka promjeniKorisnickoIme(int id, String korisnickoIme)
+    {
+        if(korisnikDao.slobodnoKorisnickoIme(korisnickoIme))
+            return new PovratnaPoruka("Korisnicko ime nije slobodno");
+        return korisnikDao.promjeniKorisnickoIme(id, korisnickoIme);
+    }
+
+    public PovratnaPoruka promjeniSifru(int id, String sifra)
+    {
+        return korisnikDao.promjeniSifru(id, sifra);
+    }
+
 
 
 }

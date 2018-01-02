@@ -26,6 +26,7 @@ public class Korisnik implements Serializable{
     }
 
 
+
     @Column(name="email", nullable = false)
     private String email;
 

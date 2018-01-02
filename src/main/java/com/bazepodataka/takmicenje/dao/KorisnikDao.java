@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.bazepodataka.takmicenje.entity.Korisnik;
 import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Transactional
@@ -32,9 +33,8 @@ public class KorisnikDao {
         String hq = "FROM Korisnik as k WHERE k.korisnickoIme = ?";
         int count = entityManager.createQuery(hq).setParameter(1, korisinckoIme).getResultList().size();
 
-
-
-        return count != 0;
+        if(count == 0) return true;
+        else return false;
     }
 
     public void dodajKorisnika(Korisnik k)
@@ -83,6 +83,51 @@ public class KorisnikDao {
             String hq = "FROM Korisnik as k WHERE k.korisnikId = ?";
             Korisnik k = (Korisnik) entityManager.createQuery(hq).setParameter(1, id).getSingleResult();
             k.setTipKorisnika("organizator");
+            entityManager.persist(k);
+            return new PovratnaPoruka();
+        }
+        catch (Exception e)
+        {
+            return new PovratnaPoruka(e.getMessage());
+        }
+    }
+
+    public PovratnaPoruka degradirajOrganizatora(int id)
+    {
+        try{
+            String hq = "FROM Korisnik as k WHERE k.korisnikId = ?";
+            Korisnik k = (Korisnik) entityManager.createQuery(hq).setParameter(1, id).getSingleResult();
+            k.setTipKorisnika("korisnik");
+            entityManager.persist(k);
+            return new PovratnaPoruka();
+        }
+        catch (Exception e)
+        {
+            return new PovratnaPoruka(e.getMessage());
+        }
+    }
+
+    public PovratnaPoruka promjeniKorisnickoIme(int id, String korisnickoIme)
+    {
+        try{
+            String hq = "FROM Korisnik as k WHERE k.korisnikId = ?";
+            Korisnik k = (Korisnik) entityManager.createQuery(hq).setParameter(1, id).getSingleResult();
+            k.setKorisnickoIme(korisnickoIme);
+            entityManager.persist(k);
+            return new PovratnaPoruka();
+        }
+        catch (Exception e)
+        {
+            return new PovratnaPoruka(e.getMessage());
+        }
+    }
+
+    public PovratnaPoruka promjeniSifru(int id, String sifra)
+    {
+        try{
+            String hq = "FROM Korisnik as k WHERE k.korisnikId = ?";
+            Korisnik k = (Korisnik) entityManager.createQuery(hq).setParameter(1, id).getSingleResult();
+            k.setSifra(sifra);
             entityManager.persist(k);
             return new PovratnaPoruka();
         }

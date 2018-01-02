@@ -34,8 +34,6 @@ public class Pitanje implements Serializable{
     @Column(name="tacanOdgovor", nullable = false)
     private String tacanOdgovor;
 
-    @Column(name="")
-
     @ManyToOne
     @JoinColumn(name = "idTest", nullable = false)
     protected Test idTesta;

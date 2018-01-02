@@ -24,8 +24,9 @@ public class TestDao {
     public Test dodajTest(Test t)
     {
         try {
-            if (t.getImeTesta().length() == 0)
+            if (t.getImeTesta().length() == 0) {
                 throw new IllegalArgumentException("Ime testa ne smije biti prazno");
+            }
             entityManager.persist(t);
             return t;
         }

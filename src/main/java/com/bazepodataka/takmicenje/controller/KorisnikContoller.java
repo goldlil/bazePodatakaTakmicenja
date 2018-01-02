@@ -3,6 +3,7 @@ package com.bazepodataka.takmicenje.controller;
 
 
 import com.bazepodataka.takmicenje.entity.Korisnik;
+import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
 import com.bazepodataka.takmicenje.povratneKlase.Prijava;
 import com.bazepodataka.takmicenje.service.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -83,6 +83,24 @@ public class KorisnikContoller {
     public ResponseEntity<PovratnaPoruka> unaprijediKorisnikaOrganizator(@PathVariable int id)
     {
         return new ResponseEntity<PovratnaPoruka>(korisnikService.unaprijediKorisnikaOrganizator(id), HttpStatus.OK);
+    }
+
+    @PostMapping("degradirajOrganizatora/{id}")
+    public ResponseEntity<PovratnaPoruka> degradirajOrganizatora(@PathVariable int id)
+    {
+        return new ResponseEntity<PovratnaPoruka>(korisnikService.degradirajOrganizatora(id), HttpStatus.OK);
+    }
+
+    @GetMapping("promjeniKorisnickoIme")
+    public ResponseEntity<PovratnaPoruka> promjeniKorisnickoIme(@RequestParam int id, @RequestParam String korisnickoIme)
+    {
+        return new ResponseEntity<PovratnaPoruka>(korisnikService.promjeniKorisnickoIme(id, korisnickoIme), HttpStatus.OK);
+    }
+
+    @GetMapping("promjeniSifru")
+    public ResponseEntity<PovratnaPoruka> promjeniSifru(@RequestParam int id, @RequestParam String sifra)
+    {
+        return new ResponseEntity<PovratnaPoruka>(korisnikService.promjeniSifru(id, sifra), HttpStatus.OK);
     }
 
 
