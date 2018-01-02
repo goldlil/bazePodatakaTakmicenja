@@ -1,0 +1,12 @@
+Korisnik
+-prijava
+-odjava
+-registracija
+-slobodnoKorisnickoIme
+-obrisi korisnika sa id-em
+-vrati deset korisnika, pocevsi od zadanog id-a
+-pretraži korisnike, vraća prvih korisnika koji se poklapaju sa unesenom rijecu
+-promoviraj korisnika u organizatora sa id-em
+-degradiraj korisnika iz organizatora u obicnog
+-promjeni korisnicko ime - takodjer provjera je li slobodno
+-promjeni sifru 
