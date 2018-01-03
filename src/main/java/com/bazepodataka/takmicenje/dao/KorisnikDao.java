@@ -37,9 +37,16 @@ public class KorisnikDao {
         else return false;
     }
 
-    public void dodajKorisnika(Korisnik k)
+    public PovratnaPoruka dodajKorisnika(Korisnik k)
     {
-        entityManager.persist(k);
+        try {
+            entityManager.persist(k);
+            return new PovratnaPoruka();
+        }
+        catch (Exception e)
+        {
+            return new PovratnaPoruka(e.getMessage());
+        }
     }
 
     public boolean obrisiKorisnika(int id)
@@ -57,10 +64,10 @@ public class KorisnikDao {
         }
     }
 
-    public List<Korisnik> dajSveKorisnike(int id)
+    public List<Korisnik> dajSveKorisnike(int id, String tip)
     {
-        String hq = "FROM Korisnik as k WHERE k.korisnikId > ?";
-        List<Korisnik> l= entityManager.createQuery(hq).setParameter(1, id).setMaxResults(10).getResultList();
+        String hq = "FROM Korisnik as k WHERE k.korisnikId > ? AND k.tipKorisnika = ?";
+        List<Korisnik> l= entityManager.createQuery(hq).setParameter(1, id).setParameter(2,tip).setMaxResults(10).getResultList();
         return l;
     }
 

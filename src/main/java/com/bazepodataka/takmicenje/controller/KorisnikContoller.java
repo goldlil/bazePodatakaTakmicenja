@@ -46,11 +46,9 @@ public class KorisnikContoller {
     }
 
     @PostMapping("registracija")
-    public ResponseEntity<Boolean> Registracija(@RequestBody Korisnik k) {
-        if (korisnikService.dodajKorisnika(k))
-            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-        else
-            return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+    public ResponseEntity<PovratnaPoruka> Registracija(@RequestBody Korisnik k) {
+        return new ResponseEntity<PovratnaPoruka>(korisnikService.dodajKorisnika(k), HttpStatus.OK);
+
     }
 
     @GetMapping("slobodnoKorisnickoIme")
@@ -70,7 +68,13 @@ public class KorisnikContoller {
     @PostMapping("/svi/{id}")
     public ResponseEntity<List<Korisnik>> dajSveKorisnik(@PathVariable int id)
     {
-        return new ResponseEntity<List<Korisnik>>(korisnikService.dajSveKorisnike(id), HttpStatus.OK);
+        return new ResponseEntity<List<Korisnik>>(korisnikService.dajSveKorisnike(id, "korisnik"), HttpStatus.OK);
+    }
+
+    @PostMapping("/sviOrganizatori/{id}")
+    public ResponseEntity<List<Korisnik>> dajSveOrganizatore(@PathVariable int id)
+    {
+        return new ResponseEntity<List<Korisnik>>(korisnikService.dajSveKorisnike(id, "organizator"), HttpStatus.OK);
     }
 
     @PostMapping("/pretraga/{rijec}")

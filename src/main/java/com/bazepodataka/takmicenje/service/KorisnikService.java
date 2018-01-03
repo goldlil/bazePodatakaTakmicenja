@@ -15,13 +15,12 @@ public class KorisnikService {
     @Autowired
     private KorisnikDao korisnikDao;
 
-    public boolean dodajKorisnika(Korisnik korisnik){
-        if(korisnikDao.slobodnoKorisnickoIme(korisnik.getKorisnickoIme())){
-            return false;
+    public PovratnaPoruka dodajKorisnika(Korisnik korisnik){
+        if(!korisnikDao.slobodnoKorisnickoIme(korisnik.getKorisnickoIme())){
+            return new PovratnaPoruka("Postoji korisnik sa odabranim korisnickim imenom!");
         }
         else{
-            korisnikDao.dodajKorisnika(korisnik);
-            return true;
+            return korisnikDao.dodajKorisnika(korisnik);
         }
     }
 
@@ -40,9 +39,9 @@ public class KorisnikService {
         return korisnikDao.obrisiKorisnika(id);
     }
 
-    public List<Korisnik> dajSveKorisnike(int id)
+    public List<Korisnik> dajSveKorisnike(int id, String tip)
     {
-       return korisnikDao.dajSveKorisnike(id);
+       return korisnikDao.dajSveKorisnike(id, tip);
     }
 
     public List<Korisnik> pretragaKorisnika(String rijec)
