@@ -39,6 +39,18 @@ public class TestController {
     {
         return new ResponseEntity<Boolean>(testService.IzbrisiPitanja(listaIdeva), HttpStatus.OK);
     }
+
+    @GetMapping("dajTestove")
+    ResponseEntity<List<Test>> dajSveTestove(@RequestParam int id)
+    {
+        return new ResponseEntity<List<Test>>(testService.dajSveTestove(id), HttpStatus.OK);
+    }
+
+    @GetMapping("dajPitanjaTesta")
+    ResponseEntity<List<Pitanje>> dajPitanjaTesta(@RequestParam int id)
+    {
+        return new ResponseEntity<List<Pitanje>>(testService.dajPitanjaTesta(id), HttpStatus.OK);
+    }
 }
 
 

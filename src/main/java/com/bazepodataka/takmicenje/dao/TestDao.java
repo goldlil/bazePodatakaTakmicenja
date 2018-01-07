@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.bazepodataka.takmicenje.service.KorisnikService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.bazepodataka.takmicenje.entity.Korisnik;
@@ -89,7 +90,7 @@ public class TestDao {
 
     public List<Test> pretragaTesta(String test){
         try{
-            String hq = "FROM Test as t WHERE t.idTest like ?";
+            String hq = "FROM Test as t WHERE t.imeTesta like ?";
             List<Test> listaTestova = (List<Test>) entityManager.createQuery(hq).setParameter(1, test + "%").setMaxResults(10).getResultList();
             return listaTestova;
         }
@@ -99,4 +100,17 @@ public class TestDao {
         }
     }
 
+    public List<Test> dajSveTestove(int id)
+    {
+        List<Test> l = (List<Test>) entityManager.createQuery("FROM Test as t WHERE t.testId > ?")
+                .setParameter(1,id).setMaxResults(10).getResultList();
+        return l;
+    }
+
+    public List<Pitanje> dajPitanjaTesta(int id)
+    {
+        List<Pitanje> lp = (List<Pitanje>) entityManager.createQuery("FROM Pitanje as p WHERE p.idTesta.testId = ?")
+                .setParameter(1,id).getResultList();
+        return lp;
+    }
 }

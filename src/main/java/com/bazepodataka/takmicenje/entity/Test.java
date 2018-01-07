@@ -1,6 +1,9 @@
 package com.bazepodataka.takmicenje.entity;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="Test")
@@ -12,20 +15,23 @@ public class Test implements Serializable {
     @Column(name="imeTesta", nullable = false)
     private String imeTesta;
 
+    @Column(name= "vrijemeZaIzdraduTesta", nullable = false)
+    private int vrijemeIzradeTesta;
+
+    @ManyToMany(mappedBy = "testovi")
+    Set<Takmicenje> takmicenja = new HashSet<Takmicenje>();
+
+    public Test(String imeTesta, int vrijemeIzradeTesta)
+    {
+        this.imeTesta = imeTesta;
+        this.vrijemeIzradeTesta = vrijemeIzradeTesta;
+    }
+
     public int getVrijemeIzradeTesta() {
         return vrijemeIzradeTesta;
     }
 
     public void setVrijemeIzradeTesta(int vrijemeIzradeTesta) {
-        this.vrijemeIzradeTesta = vrijemeIzradeTesta;
-    }
-
-    @Column(name= "vrijemeZaIzdraduTesta", nullable = false)
-    private int vrijemeIzradeTesta;
-
-    public Test(String imeTesta, int vrijemeIzradeTesta)
-    {
-        this.imeTesta = imeTesta;
         this.vrijemeIzradeTesta = vrijemeIzradeTesta;
     }
 

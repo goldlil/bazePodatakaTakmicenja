@@ -34,4 +34,14 @@ public class TestService {
     public boolean ObrisiTest(int id){
         return testDao.obrisiTest(id);
     }
+
+    public List<Test> dajSveTestove(int id)
+    {
+        return testDao.dajSveTestove(id);
+    }
+
+    public List<Pitanje> dajPitanjaTesta(int id)
+    {
+        return testDao.dajPitanjaTesta(id);
+    }
 }
