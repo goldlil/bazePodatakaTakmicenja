@@ -61,7 +61,7 @@ public class KorisnikService {
 
     public PovratnaPoruka promjeniKorisnickoIme(int id, String korisnickoIme)
     {
-        if(korisnikDao.slobodnoKorisnickoIme(korisnickoIme))
+        if(!korisnikDao.slobodnoKorisnickoIme(korisnickoIme))
             return new PovratnaPoruka("Korisnicko ime nije slobodno");
         return korisnikDao.promjeniKorisnickoIme(id, korisnickoIme);
     }

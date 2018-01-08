@@ -37,4 +37,10 @@ public class TakmicenjeController {
     {
         return new ResponseEntity<List<Takmicenje>>(takmicenjeService.dajSvaTakmicenja(id), HttpStatus.OK);
     }
+
+    /*@GetMapping("dajTestoveZaTakmicenjeOrganizator")
+    public ResponseEntity<List<Test>> dajTestoveZaTakmicenjeOrganizator(@RequestParam int id)
+    {
+        return new ResponseEntity<List<Test>>(takmicenjeService.dajTestoveZaTakmicenjeOrganizator(id), HttpStatus.OK);
+    }*/
 }
