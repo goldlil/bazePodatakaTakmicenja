@@ -114,6 +114,18 @@ public class KorisnikDao {
         }
     }
 
+    public Korisnik dajKorisnikaPoIdu(int id)
+    {
+        String hq = "FROM Korisnik as k WHERE k.korisnikId = ?";
+        return (Korisnik) entityManager.createQuery(hq).setParameter(1, id).getSingleResult();
+    }
+
+    public Korisnik dajKorisnikaPoKorisnickomImenu(String korisnickoIme)
+    {
+        String hq = "FROM Korisnik as k WHERE k.korisnickoIme = ?";
+        return   (Korisnik) entityManager.createQuery(hq).setParameter(1, korisnickoIme).getSingleResult();
+    }
+
     public PovratnaPoruka promjeniKorisnickoIme(int id, String korisnickoIme)
     {
         try{

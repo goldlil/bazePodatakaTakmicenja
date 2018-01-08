@@ -29,12 +29,14 @@ public class KorisnikContoller {
     @GetMapping("/prijava")
     public ResponseEntity<Prijava> Prijava(@RequestParam String korisnickoIme, @RequestParam String sifra)
     {
-        String korisnikPostoji = korisnikService.daLiPostojiKorisnik(new Korisnik(korisnickoIme, sifra, "", ""));
+        /*String korisnikPostoji = korisnikService.daLiPostojiKorisnik(new Korisnik(korisnickoIme, sifra, "", ""));
         if(korisnikPostoji != "null")
             return new ResponseEntity<Prijava>(new Prijava(true, korisnickoIme, korisnikPostoji, ""), HttpStatus.OK);
         else
             return  new ResponseEntity<Prijava>(new Prijava(false, "", "", ""), HttpStatus.OK);
+*/
 
+        return new ResponseEntity<Prijava>(korisnikService.prijava(korisnickoIme, sifra), HttpStatus.OK);
     }
 
     @CrossOrigin(origins =  "http://localhost:3000")

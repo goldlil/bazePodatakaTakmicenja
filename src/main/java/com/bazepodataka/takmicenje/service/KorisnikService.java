@@ -2,10 +2,10 @@ package com.bazepodataka.takmicenje.service;
 
 import com.bazepodataka.takmicenje.dao.KorisnikDao;
 import com.bazepodataka.takmicenje.entity.Korisnik;
+import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
+import com.bazepodataka.takmicenje.povratneKlase.Prijava;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
-
 
 import java.util.List;
 
@@ -71,6 +71,22 @@ public class KorisnikService {
         return korisnikDao.promjeniSifru(id, sifra);
     }
 
+    public Prijava prijava(String korisnickoIme, String sifra)
+    {
+        try {
+            Korisnik k = korisnikDao.dajKorisnikaPoKorisnickomImenu(korisnickoIme);
+            System.out.println(k.getSifra() + " - " + sifra);
+            if(k.getSifra().equals(sifra))
+                return new Prijava(true, k.getKorisnickoIme(), k.getTipKorisnika(), Integer.toString(k.getKorisnikId()));
+            else
+                return new Prijava(false, "Pogresna sifra", "", "");
+
+        }
+        catch (Exception e)
+        {
+            return new Prijava(false, "Pogresan username", "", "");
+        }
+    }
 
 
 }

@@ -17,18 +17,18 @@ public class Prijava {
         this.tip = tip;
     }
 
-    public String getToken() {
-        return token;
+    public String getId() {
+        return id;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setId(String id) {
+        this.id = id;
     }
 
     private Boolean prijavljen;
     private String username;
     private String tip;
-    private String token;
+    private String id;
 
     public Prijava(){}
 
@@ -40,10 +40,10 @@ public class Prijava {
         this.username = username;
     }
 
-    public Prijava(Boolean prijavljen, String username, String tip, String token) {
+    public Prijava(Boolean prijavljen, String username, String tip, String id) {
         this.prijavljen = prijavljen;
         this.tip = tip;
         this.username = username;
-        this.token = token;
+        this.id = id;
     }
 }

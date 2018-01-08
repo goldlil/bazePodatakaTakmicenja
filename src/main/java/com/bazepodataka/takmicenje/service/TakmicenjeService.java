@@ -7,6 +7,8 @@ import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class TakmicenjeService {
@@ -21,5 +23,10 @@ public class TakmicenjeService {
     public PovratnaPoruka dodajTest(int idTakmicenja, int idTesta)
     {
         return takmicenjaDao.dodajTest(idTakmicenja, idTesta);
+    }
+
+    public List<Takmicenje> dajSvaTakmicenja(int id)
+    {
+        return takmicenjaDao.dajSvaTakmicenja(id);
     }
 }

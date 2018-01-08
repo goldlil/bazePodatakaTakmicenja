@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @Controller
 @RequestMapping("/takmicenje")
@@ -30,5 +32,9 @@ public class TakmicenjeController {
         return new ResponseEntity<PovratnaPoruka>(takmicenjeService.dodajTest(idTakmicenja, idTesta), HttpStatus.OK);
     }
 
-   // @GetMapping("dajSvaTakmicenja")
+    @GetMapping("dajSvaTakmicenja")
+    public ResponseEntity<List<Takmicenje>> dajSvaTakmicenja(@RequestParam int id)
+    {
+        return new ResponseEntity<List<Takmicenje>>(takmicenjeService.dajSvaTakmicenja(id), HttpStatus.OK);
+    }
 }

@@ -12,10 +12,11 @@ import java.util.Set;
 @Table(name = "Takmicenje")
 public class Takmicenje {
 
-    public Takmicenje(String nazivTakmicenja, Date datumPocektaOdrzavanja, int trajanje) {
+    public Takmicenje(String nazivTakmicenja, Date datumPocektaOdrzavanja, int trajanje, Korisnik organizator) {
         this.nazivTakmicenja = nazivTakmicenja;
         this.datumPocektaOdrzavanja = datumPocektaOdrzavanja;
         this.trajanje = trajanje;
+        this.organizator = organizator;
     }
 
     public int getTakmicenjeId() {
@@ -59,6 +60,14 @@ public class Takmicenje {
         this.trajanje = trajanje;
     }
 
+    public Korisnik getOrganizator() {
+        return organizator;
+    }
+
+    public void setOrganizator(Korisnik organizator) {
+        this.organizator = organizator;
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="idTakmicenja", nullable = false)
@@ -73,6 +82,10 @@ public class Takmicenje {
 
     @Column(name = "trajanje", nullable = false) //u minutama
     private int trajanje;
+
+    @ManyToOne
+    @JoinColumn(name = "idKorisnik", nullable = false)
+    private Korisnik organizator;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(

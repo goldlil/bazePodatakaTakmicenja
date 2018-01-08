@@ -2,6 +2,7 @@ package com.bazepodataka.takmicenje.dao;
 
 import com.bazepodataka.takmicenje.entity.*;
 import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.sql.SQLException;
+import java.util.List;
 
 
 @Transactional
@@ -17,6 +19,9 @@ public class TakmicenjaDao {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    private KorisnikDao korisnikDao;
 
     public Takmicenje kreirajTakmicenje(Takmicenje t) {
         try {
@@ -52,5 +57,41 @@ public class TakmicenjaDao {
         }
 
     }
+
+    public List<Takmicenje> dajSvaTakmicenja(int id)
+    {
+        return (List<Takmicenje>) entityManager.createQuery("FROM Takmicenje AS t WHERE t.takmicenjeId > ?")
+                .setParameter(1, id).setMaxResults(10).getResultList();
+    }
+
+    public Takmicenje dajTakmicenjePoIdu(int id)
+    {
+        return (Takmicenje) entityManager.createQuery("FROM Takmicenje AS t WHERE t.takmicenjeId = ?")
+                .setParameter(1, id).getSingleResult();
+    }
+
+
+
+    public PovratnaPoruka dodajKorisnikaUTakmicenje(int idTakmicenja, int idKorisnika, boolean potvrdjen)
+    {
+        try{
+
+            Takmicenje t = dajTakmicenjePoIdu(idTakmicenja);
+            Korisnik k = korisnikDao.dajKorisnikaPoIdu(idKorisnika);
+
+            Prijava p = new Prijava(t, k, potvrdjen);
+            entityManager.persist(p);
+            return new PovratnaPoruka();
+        }
+        catch (NoResultException e)
+        {
+            return new PovratnaPoruka("Trazeni objekti nisu pronadjeni u bazi!");
+        }
+        catch (Exception e)
+        {
+            return new PovratnaPoruka(e.getMessage());
+        }
+    }
+
 
 }

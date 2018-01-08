@@ -78,8 +78,7 @@ public class TestDao {
 
     public boolean obrisiTest(int id){
         try{
-            String hq = "FROM Test as p WHERE p.idTest = ?";
-            Test t = (Test) entityManager.createQuery(hq).setParameter(1, id).getSingleResult();
+            Test t = (Test) entityManager.createQuery("FROM Test as p WHERE p.idTest = ?").setParameter(1, id).getSingleResult();
             entityManager.remove(t);
             return true;
         }
