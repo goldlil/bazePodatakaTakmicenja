@@ -4,7 +4,7 @@ package com.bazepodataka.takmicenje.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Prijava")
+@Table(name = "PrijavaKorisnika")
 public class Prijava {
 
     public Prijava(Takmicenje takmicenjeId, Korisnik korisnikId, boolean potvrdjena) {

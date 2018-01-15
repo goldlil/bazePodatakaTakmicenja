@@ -27,15 +27,12 @@ public class TakmicenjaDao {
         try {
             entityManager.persist(t);
             return t;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new IllegalArgumentException("Desila se greska pri upisu u bazu");
         }
     }
 
-    public PovratnaPoruka dodajTest(int idTakmicenja, int idTesta)
-    {
+    public PovratnaPoruka dodajTest(int idTakmicenja, int idTesta) {
         try {
             Takmicenje takmicenje = (Takmicenje) entityManager.createQuery("FROM Takmicenje as t WHERE t.takmicenjeId = ?")
                     .setParameter(1, idTakmicenja).getSingleResult();
@@ -46,35 +43,27 @@ public class TakmicenjaDao {
             takmicenje.dodajTest(test);
             entityManager.persist(takmicenje);
             return new PovratnaPoruka();
-        }
-        catch (NoResultException e)
-        {
+        } catch (NoResultException e) {
             return new PovratnaPoruka("Ne mogu se naci objekti sa zadatim id-evima!");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return new PovratnaPoruka(e.getMessage());
         }
 
     }
 
-    public List<Takmicenje> dajSvaTakmicenja(int id)
-    {
+    public List<Takmicenje> dajSvaTakmicenja(int id) {
         return (List<Takmicenje>) entityManager.createQuery("FROM Takmicenje AS t WHERE t.takmicenjeId > ?")
                 .setParameter(1, id).setMaxResults(10).getResultList();
     }
 
-    public Takmicenje dajTakmicenjePoIdu(int id)
-    {
+    public Takmicenje dajTakmicenjePoIdu(int id) {
         return (Takmicenje) entityManager.createQuery("FROM Takmicenje AS t WHERE t.takmicenjeId = ?")
                 .setParameter(1, id).getSingleResult();
     }
 
 
-
-    public PovratnaPoruka dodajKorisnikaUTakmicenje(int idTakmicenja, int idKorisnika, boolean potvrdjen)
-    {
-        try{
+    public PovratnaPoruka dodajKorisnikaUTakmicenje(int idTakmicenja, int idKorisnika, boolean potvrdjen) {
+        try {
 
             Takmicenje t = dajTakmicenjePoIdu(idTakmicenja);
             Korisnik k = korisnikDao.dajKorisnikaPoIdu(idKorisnika);
@@ -82,16 +71,17 @@ public class TakmicenjaDao {
             Prijava p = new Prijava(t, k, potvrdjen);
             entityManager.persist(p);
             return new PovratnaPoruka();
-        }
-        catch (NoResultException e)
-        {
+        } catch (NoResultException e) {
             return new PovratnaPoruka("Trazeni objekti nisu pronadjeni u bazi!");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return new PovratnaPoruka(e.getMessage());
         }
     }
-
-
 }
+
+    /*List<Test> dajTestoveZaTakmicenjeOrganizator(int id)
+    {
+        return (List<Test>) entityManager.createQuery("FROM Test as t WHERE t.organizator.")
+    }*/
+
+

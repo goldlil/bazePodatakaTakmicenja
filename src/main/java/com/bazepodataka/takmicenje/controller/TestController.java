@@ -1,7 +1,9 @@
 package com.bazepodataka.takmicenje.controller;
 
 import com.bazepodataka.takmicenje.entity.Pitanje;
+import com.bazepodataka.takmicenje.entity.Rezultat;
 import com.bazepodataka.takmicenje.entity.Test;
+import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
 import com.bazepodataka.takmicenje.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,6 +52,18 @@ public class TestController {
     ResponseEntity<List<Pitanje>> dajPitanjaTesta(@RequestParam int id)
     {
         return new ResponseEntity<List<Pitanje>>(testService.dajPitanjaTesta(id), HttpStatus.OK);
+    }
+
+    @PostMapping("dodajRezultat")
+    ResponseEntity<PovratnaPoruka> dodajRezultat(@RequestBody Rezultat r)
+    {
+        return new ResponseEntity<PovratnaPoruka>(testService.dodajRezultat(r), HttpStatus.OK);
+    }
+
+    @GetMapping("dajSveRezultate")
+    ResponseEntity<List<Rezultat>> dajSveRezultate()
+    {
+        return new ResponseEntity<List<Rezultat>>(testService.dajSveRezultate(), HttpStatus.OK);
     }
 }
 

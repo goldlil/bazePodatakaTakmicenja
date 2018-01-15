@@ -7,9 +7,6 @@ import java.io.Serializable;
 @Table(name="Rezultat")
 public class Rezultat implements Serializable{
 
-    public int getTestTd() {
-        return testTd;
-    }
 
     public Korisnik getIdKorisnika() {
         return idKorisnika;
@@ -19,13 +16,10 @@ public class Rezultat implements Serializable{
         return idTesta;
     }
 
-    public String getRezultat() {
+    public int getRezultat() {
         return rezultat;
     }
 
-    private void setTestTd(int testTd) {
-        this.testTd = testTd;
-    }
 
     private void setIdKorisnika(Korisnik idKorisnika) {
         this.idKorisnika = idKorisnika;
@@ -35,20 +29,30 @@ public class Rezultat implements Serializable{
         this.idTesta = idTesta;
     }
 
-    private void setRezultat(String rezultat) {
+    private void setRezultat(int rezultat) {
         this.rezultat = rezultat;
     }
 
-    public Rezultat(Korisnik idKorisnika, Test idTesta, String rezultat) {
+    public int getRezultatId() {
+        return rezultatId;
+    }
+
+    public void setRezultatId(int rezultatId) {
+        this.rezultatId = rezultatId;
+    }
+
+    public Rezultat(Korisnik idKorisnika, Test idTesta, int rezultat) {
         this.idKorisnika = idKorisnika;
         this.idTesta = idTesta;
         this.rezultat = rezultat;
     }
 
+    public Rezultat() {}
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="idTest", nullable = false)
-    private int testTd;
+    @Column(name="idRezultata", nullable = false)
+    private int rezultatId;
 
     @ManyToOne
     @JoinColumn(name="idKorisnika", nullable = false)
@@ -59,5 +63,5 @@ public class Rezultat implements Serializable{
     private Test idTesta;
 
     @Column(name="rezultat", nullable = false)
-    private String rezultat;
+    private int rezultat;
 }

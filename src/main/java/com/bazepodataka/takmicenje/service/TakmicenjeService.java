@@ -29,4 +29,9 @@ public class TakmicenjeService {
     {
         return takmicenjaDao.dajSvaTakmicenja(id);
     }
+
+    /*public List<Takmicenje> dajTestoveZaTakmicenjeOrganizator(int id)
+    {
+        return takmicenjaDao.dajTestoveZaTakmicenjeOrganizator(int id);
+    }*/
 }

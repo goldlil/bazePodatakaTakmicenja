@@ -4,7 +4,7 @@ package com.bazepodataka.takmicenje.controller;
 
 import com.bazepodataka.takmicenje.entity.Korisnik;
 import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
-import com.bazepodataka.takmicenje.povratneKlase.Prijava;
+import com.bazepodataka.takmicenje.povratneKlase.PrijavaKorisnika;
 import com.bazepodataka.takmicenje.service.KorisnikService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,16 +27,19 @@ public class KorisnikContoller {
     private  HttpSession httpSession;
 
     @GetMapping("/prijava")
-    public ResponseEntity<Prijava> Prijava(@RequestParam String korisnickoIme, @RequestParam String sifra)
+    public ResponseEntity<PrijavaKorisnika> Prijava(@RequestParam String korisnickoIme, @RequestParam String sifra)
     {
         /*String korisnikPostoji = korisnikService.daLiPostojiKorisnik(new Korisnik(korisnickoIme, sifra, "", ""));
         if(korisnikPostoji != "null")
-            return new ResponseEntity<Prijava>(new Prijava(true, korisnickoIme, korisnikPostoji, ""), HttpStatus.OK);
+            return new ResponseEntity<PrijavaKorisnika>(new PrijavaKorisnika(true, korisnickoIme, korisnikPostoji, ""), HttpStatus.OK);
         else
-            return  new ResponseEntity<Prijava>(new Prijava(false, "", "", ""), HttpStatus.OK);
+            return  new ResponseEntity<PrijavaKorisnika>(new PrijavaKorisnika(false, "", "", ""), HttpStatus.OK);
 */
+        PrijavaKorisnika p = korisnikService.prijava(korisnickoIme, sifra);
+        if(p.getPrijavljen())
+            httpSession.setAttribute("korisnik", p);
 
-        return new ResponseEntity<Prijava>(korisnikService.prijava(korisnickoIme, sifra), HttpStatus.OK);
+        return new ResponseEntity<PrijavaKorisnika>(p, HttpStatus.OK);
     }
 
     @CrossOrigin(origins =  "http://localhost:3000")
@@ -108,6 +111,7 @@ public class KorisnikContoller {
     {
         return new ResponseEntity<PovratnaPoruka>(korisnikService.promjeniSifru(id, sifra), HttpStatus.OK);
     }
+
 
 
 

@@ -1,6 +1,6 @@
 package com.bazepodataka.takmicenje.povratneKlase;
 
-public class Prijava {
+public class PrijavaKorisnika {
     public Boolean getPrijavljen() {
         return prijavljen;
     }
@@ -30,7 +30,7 @@ public class Prijava {
     private String tip;
     private String id;
 
-    public Prijava(){}
+    public PrijavaKorisnika(){}
 
     public String getUsername() {
         return username;
@@ -40,7 +40,7 @@ public class Prijava {
         this.username = username;
     }
 
-    public Prijava(Boolean prijavljen, String username, String tip, String id) {
+    public PrijavaKorisnika(Boolean prijavljen, String username, String tip, String id) {
         this.prijavljen = prijavljen;
         this.tip = tip;
         this.username = username;

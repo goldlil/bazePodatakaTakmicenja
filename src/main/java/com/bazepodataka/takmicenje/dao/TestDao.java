@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.bazepodataka.takmicenje.entity.Rezultat;
+import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
 import com.bazepodataka.takmicenje.service.KorisnikService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
@@ -111,5 +113,23 @@ public class TestDao {
         List<Pitanje> lp = (List<Pitanje>) entityManager.createQuery("FROM Pitanje as p WHERE p.idTesta.testId = ?")
                 .setParameter(1,id).getResultList();
         return lp;
+    }
+
+    public PovratnaPoruka dodajRezultat(Rezultat r)
+    {
+        try{
+            entityManager.persist(r);
+            return new PovratnaPoruka();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return new PovratnaPoruka(e.getMessage());
+        }
+    }
+
+    public List<Rezultat> DajSveRezultate()
+    {
+        return (List<Rezultat>)entityManager.createQuery("FROM Rezultat as r").getResultList();
     }
 }

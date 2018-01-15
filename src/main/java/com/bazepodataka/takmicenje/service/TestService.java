@@ -2,7 +2,9 @@ package com.bazepodataka.takmicenje.service;
 
 import com.bazepodataka.takmicenje.dao.TestDao;
 import com.bazepodataka.takmicenje.entity.Pitanje;
+import com.bazepodataka.takmicenje.entity.Rezultat;
 import com.bazepodataka.takmicenje.entity.Test;
+import com.bazepodataka.takmicenje.povratneKlase.PovratnaPoruka;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +45,15 @@ public class TestService {
     public List<Pitanje> dajPitanjaTesta(int id)
     {
         return testDao.dajPitanjaTesta(id);
+    }
+
+    public PovratnaPoruka dodajRezultat(Rezultat r)
+    {
+        return testDao.dodajRezultat(r);
+    }
+
+    public List<Rezultat> dajSveRezultate()
+    {
+        return testDao.DajSveRezultate();
     }
 }
